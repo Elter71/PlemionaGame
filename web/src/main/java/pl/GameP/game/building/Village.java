@@ -1,7 +1,7 @@
 package pl.GameP.game.building;
 
 import pl.GameP.spring.bean.GameBean;
-import pl.GameP.spring.model.LevelVillage;
+import pl.GameP.spring.model.Entity.LevelVillage;
 
 /**
  * Created by elter on 30.03.17.

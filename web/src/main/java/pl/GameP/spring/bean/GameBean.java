@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.GameP.game.Game;
 import pl.GameP.game.GameProgress;
-import pl.GameP.spring.model.*;
-import sun.rmi.runtime.Log;
+import pl.GameP.spring.model.Entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +53,10 @@ public class GameBean {
     }
 
     public void createGameFromAccounInDataBase() {
-        List<pl.GameP.spring.model.GameProgress> progresses = dataBaseController.getAllGameProgress();
+        List<pl.GameP.spring.model.Entity.GameProgress> progresses = dataBaseController.getAllGameProgress();
 
         boolean isBreak;
-        for (pl.GameP.spring.model.GameProgress gameProgress :
+        for (pl.GameP.spring.model.Entity.GameProgress gameProgress :
                 progresses) {
             isBreak = false;
             for (Game game :
@@ -97,7 +96,7 @@ public class GameBean {
         setLists();
     }
 
-    public void saveAccount(pl.GameP.spring.model.GameProgress gameProgress) {
+    public void saveAccount(pl.GameP.spring.model.Entity.GameProgress gameProgress) {
         dataBaseController.saveData(gameProgress);
     }
 }

@@ -10,7 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.GameP.spring.bean.GameBean;
 import pl.GameP.game.Building;
 import pl.GameP.game.Game;
-import pl.GameP.spring.model.Account;
+import pl.GameP.spring.bean.GameSession;
+import pl.GameP.spring.model.Entity.Account;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -27,9 +28,9 @@ public class GameController {
 
     @Autowired
     private GameBean gameBean;
-
     private String message;
-
+    @Autowired
+    private GameSession gameSession;
 
     @PostConstruct
     public void initServer() {
@@ -48,8 +49,6 @@ public class GameController {
         ModelAndView modelAndView = new ModelAndView();
         session.removeAttribute("ID");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        System.out.println("ID -menu-" + session.getAttribute("ID"));
         modelAndView.addObject("GameProgressList", this.gameBean.getAccountByLogin(authentication.getName()).getGameProgress());
         modelAndView.setViewName("GameIndex");
         return modelAndView;
@@ -62,10 +61,8 @@ public class GameController {
             int id = (Integer) session.getAttribute("ID");
             setValueToModelMap(modelMap, gameBean.getGameByID(id));
             gameBean.getGameByID(id).refresh();
-            System.out.println("Refresh accoutn gameprogress list" + gameBean.getGameByID(id).getGameProgress().getAccount().getGameProgress().size());
             int size = gameBean.getGameByID(id).getGameProgress().getAccount().getGameProgress().size();
             gameBean.saveAccount(gameBean.getGameByID(id).getGameProgress().getAccount().getGameProgress().get(size - 1));
-//            System.out.println("Refresh GameProgress Size" + this.gameBean.getAccountByLogin(authentication.getName()));
             return new ModelAndView("Game");
         }
 
@@ -81,8 +78,6 @@ public class GameController {
         Account account = gameBean.getAccountByLogin(authentication.getName());
         int i = Integer.parseInt(action);
         session.setAttribute("ID", account.getGameProgress().get(i-1).getIdProgress());
-        System.out.println("Action!!" + action + "|||" + session.getAttribute("ID"));
-
         setValueToModelMap(modelMap, gameBean.getGameByID((Integer) session.getAttribute("ID")));
         return "Game";
     }

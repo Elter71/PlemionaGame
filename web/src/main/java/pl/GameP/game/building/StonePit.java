@@ -1,7 +1,7 @@
 package pl.GameP.game.building;
 
 import pl.GameP.spring.bean.GameBean;
-import pl.GameP.spring.model.LevelStonePit;
+import pl.GameP.spring.model.Entity.LevelStonePit;
 
 /**
  * Created by elter on 26.03.17.

@@ -6,13 +6,13 @@ import pl.GameP.spring.bean.GameBean;
 /**
  * Created by Rodzice on 09.03.2017.
  */
-public class GameProgress extends pl.GameP.spring.model.GameProgress {
+public class GameProgress extends pl.GameP.spring.model.Entity.GameProgress {
     private Sawmill sawmill;
     private Farm farm;
     private StonePit stonePit;
     private Village village;
 
-    public GameProgress(pl.GameP.spring.model.GameProgress gameProgress) {
+    public GameProgress(pl.GameP.spring.model.Entity.GameProgress gameProgress) {
 
         this.setIdProgress(gameProgress.getIdProgress());
         this.setIdAccount(gameProgress.getIdAccount());
@@ -44,8 +44,8 @@ public class GameProgress extends pl.GameP.spring.model.GameProgress {
     public Village getVillage(){
         return village;
     }
-    public pl.GameP.spring.model.GameProgress toModel() {
-        pl.GameP.spring.model.GameProgress progressModel = new pl.GameP.spring.model.GameProgress();
+    public pl.GameP.spring.model.Entity.GameProgress toModel() {
+        pl.GameP.spring.model.Entity.GameProgress progressModel = new pl.GameP.spring.model.Entity.GameProgress();
         progressModel.setIdProgress(this.getIdProgress());
         progressModel.setIdAccount(this.getIdAccount());
         progressModel.setAccount(this.getAccount());

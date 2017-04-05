@@ -1,7 +1,7 @@
 package pl.GameP.game.building;
 
 import pl.GameP.spring.bean.GameBean;
-import pl.GameP.spring.model.LevelSawmill;
+import pl.GameP.spring.model.Entity.LevelSawmill;
 
 /**
  * Created by Rodzice on 09.03.2017.

@@ -4,7 +4,6 @@ import pl.GameP.spring.bean.GameBean;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -150,7 +149,7 @@ public class Game {
                         break;
                     case Wioska:
                         gameProgress.getVillage().ExpansionBuilding();
-                        gameProgress.getAccount().getGameProgress().add(new pl.GameP.spring.model.GameProgress(gameProgress.getIdAccount(), gameProgress.getAccount()));
+                        gameProgress.getAccount().getGameProgress().add(new pl.GameP.spring.model.Entity.GameProgress(gameProgress.getIdAccount(), gameProgress.getAccount()));
                         System.out.println("GameProgressList Size" + gameProgress.getAccount().getGameProgress().size());
                         break;
                 }

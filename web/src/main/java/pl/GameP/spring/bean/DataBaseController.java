@@ -1,8 +1,7 @@
 package pl.GameP.spring.bean;
 
 import org.springframework.stereotype.Repository;
-import pl.GameP.game.Game;
-import pl.GameP.spring.model.*;
+import pl.GameP.spring.model.Entity.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

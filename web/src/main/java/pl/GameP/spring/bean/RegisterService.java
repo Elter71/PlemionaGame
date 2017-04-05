@@ -3,10 +3,10 @@ package pl.GameP.spring.bean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.GameP.data.AccountData;
-import pl.GameP.spring.model.AccountRole;
-import pl.GameP.spring.model.GameProgress;
-import pl.GameP.spring.model.Account;
+import pl.GameP.spring.model.AccountData;
+import pl.GameP.spring.model.Entity.AccountRole;
+import pl.GameP.spring.model.Entity.GameProgress;
+import pl.GameP.spring.model.Entity.Account;
 
 import java.util.ArrayList;
 import java.util.List;

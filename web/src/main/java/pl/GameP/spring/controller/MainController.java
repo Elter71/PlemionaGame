@@ -8,22 +8,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import pl.GameP.data.AccountData;
+import pl.GameP.spring.model.AccountData;
 import pl.GameP.spring.bean.RegisterService;
+import pl.GameP.spring.modelValidation.LoginValidation;
+import pl.GameP.spring.modelValidation.RegisterValidation;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by Rodzice on 09.03.2017.
+ * Created by elter on 09.03.2017.
  */
 @Controller
 public class MainController {
 
     @Autowired
-    RegisterService registerService;
+    private RegisterValidation registerValidation;
+    @Autowired
+    private LoginValidation loginValidation;
 
     @RequestMapping("/")
     public ModelAndView intexWeb() {
@@ -38,17 +40,9 @@ public class MainController {
 
     @RequestMapping("/login")
     public ModelAndView login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "logout", required = false) String logout) {
-        ModelAndView modelAndView = new ModelAndView();
-        if (error != null) {
-            modelAndView.addObject("error", "Nieprawidłowy login lub hasło!");
-        }
-
-        if (logout != null) {
-            modelAndView.addObject("msg", "Wylogowałeś się pomyślnie");
-
-        }
-        modelAndView.setViewName("login");
-        return modelAndView;
+        loginValidation.sendError(error);
+        loginValidation.sendLogout(logout);
+        return loginValidation.getModelAndView();
 
     }
 
@@ -59,18 +53,9 @@ public class MainController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(@ModelAttribute("registerForm") @Valid AccountData account, BindingResult result) {
-        if (!account.getPassword().equals(account.getSamePassword()))
-            result.rejectValue("password", "error.password", "Hasła nie są identyczne.");
-        if (registerService.isAccountExist(account))
-            result.rejectValue("login", "error.login", "Login jest już zajęty.");
-
-        if (result.hasErrors()) {
-            return new ModelAndView("register");
-        } else {
-            registerService.saveDataInDataBase(account);
-            return new ModelAndView("index");
-        }
-
+        registerValidation.setResult(result);
+        registerValidation.sendAccount(account);
+        return this.registerValidation.getModelAndView();
     }
 
 
